@@ -31,14 +31,40 @@ require("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js")
     osc.start(0);
 
     var t0 = audioctx.currentTime;
-    var t1 = t0 + parseFloat("0.01");
-    var d = parseFloat("0.05");
+    var t1 = t0 + parseFloat("0.5");
+    var d = parseFloat("0.5");
     var s = parseFloat("0.0");
     gain.gain.setValueAtTime(0, t0);
-    gain.gain.linearRampToValueAtTime(1, t1);
+    gain.gain.linearRampToValueAtTime(0.001, t1);
     gain.gain.setTargetAtTime(s, t1, d);
 
   }
+
+
+
+
+
+/*
+// イベント握る部分(マウスオーバー用)
+*/
+
+  // $("a").on("mouseover", function(){
+  //   //console.log("a");
+  //   Play(400);
+  // })
+
+  // $("ul").on("mouseover", function(){
+  //   //console.log("div");
+  //   Play(1200);
+  // })
+
+  // $("rect").on("mouseover", function(){
+    
+  //   var color = $(this).attr("style").substr(7,14);
+  //   var intVal = parseInt(color, 16)
+  //   Play(intVal * 0.0001);
+  // })
+
 
 
 /*

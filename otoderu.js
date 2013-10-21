@@ -1,1 +1,79 @@
-javascript:!function(b,d,a){a=b.createElement("script");a.src="//j.mp/1bPoAXq";a.onload=function(){d(jQuery.noConflict(1))};b.body.appendChild(a)}(document,function(b){b(document).ready(function(){function d(e){f.frequency.value=e;f.start(0);e=a.currentTime;var b=e+0.01;c.gain.setValueAtTime(0,e);c.gain.linearRampToValueAtTime(1,b);c.gain.setTargetAtTime(0,b,0.1)}var a=new webkitAudioContext,f=a.createOscillator(),c=a.createGain();c.gain.value=0;f.connect(c);c.connect(a.destination);b("a").on("mouseover",function(){d(400)}); b("ul").on("mouseover",function(){d(1200)});b("rect").on("mouseover",function(){console.log("aaa");var a=b(this).attr("style").substr(7,14),a=parseInt(a,16);console.log(1E-4*a);d(1E-4*a)})})});
+  !function(d,f,s){s=d.createElement("script");s.src="//j.mp/1bPoAXq";s.onload=function(){f(jQuery.noConflict(1))};d.body.appendChild(s)}(document,function($){
+    var audioctx = new webkitAudioContext();
+
+    function Play(freqVal) {
+      
+      var gain = audioctx.createGain();
+      var osc = audioctx.createOscillator();
+      osc.connect(gain);
+      
+      gain.connect(audioctx.destination);
+      gain.gain.value = 0;
+    
+        
+      
+
+      osc.frequency.value = freqVal;
+      osc.start(0);
+
+      var t0 = audioctx.currentTime;
+      var t1 = t0 + parseFloat("0.01");
+      var d = parseFloat("0.05");
+      var s = parseFloat("0.0");
+      gain.gain.setValueAtTime(0, t0);
+      gain.gain.linearRampToValueAtTime(0.5, t1);
+      gain.gain.setTargetAtTime(s, t1, d);
+
+    }
+
+
+    var tags = {
+      "div"  : { "note" : "c", "noteNum" : 60 },
+      "p"    : { "note" : "d", "noteNum" : 62 },
+      "span" : { "note" : "e", "noteNum" : 64 },
+      "form" : { "note" : "f", "noteNum" : 65 },
+      "img"  : { "note" : "g", "noteNum" : 67 },
+      "a"    : { "note" : "a", "noteNum" : 69 },
+      "li"   : { "note" : "b", "noteNum" : 71 }
+    }
+
+    function key(noteNum, oct){
+      if(typeof oct === 'undefined') oct = 1;
+      return noteNum * oct;
+    }
+
+    function mtof(val) {
+      return Math.floor(440*Math.pow(2, (val-69)/12));
+    }
+
+
+    function tagTofreq(tagname) {
+      if (tagname in tags) {
+        //console.log(tagname)
+        var noteNum = tags[tagname].noteNum
+        return mtof( key(noteNum) )
+      } else {
+
+      }
+    }
+
+
+
+    
+     for (var tagname in tags) {
+      
+      $(tagname).on("mouseover", (function(tagname) {
+          return function() {
+            console.log(tagname);
+            Play( tagTofreq(tagname) );
+            $(this).unbind();
+          };
+        })(tagname)
+      );
+    }
+
+    
+
+
+
+  })
