@@ -2,9 +2,15 @@
   <body>
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-    <script src="webaudio_experimental.js"></script>
+    <script src="webaudio_experimental2.js"></script>
     
     <button class="playing"> play </button>
-    <a href="javascript:!function(b,d,a){a=b.createElement("script");a.src="//j.mp/1bPoAXq";a.onload=function(){d(jQuery.noConflict(1))};b.body.appendChild(a)}(document,function(b){b(document).ready(function(){function d(e){f.frequency.value=e;f.start(0);e=a.currentTime;var b=e+0.01;c.gain.setValueAtTime(0,e);c.gain.linearRampToValueAtTime(1,b);c.gain.setTargetAtTime(0,b,0.1)}var a=new webkitAudioContext,f=a.createOscillator(),c=a.createGain();c.gain.value=0;f.connect(c);c.connect(a.destination);b("a").on("mouseover",function(){d(400)}); b("ul").on("mouseover",function(){d(1200)});b("rect").on("mouseover",function(){console.log("aaa");var a=b(this).attr("style").substr(7,14),a=parseInt(a,16);console.log(1E-4*a);d(1E-4*a)})})});">相対パスでリンクします</a>
+    
+
+
+<a href='javascript:!function(b,d,c){c=b.createElement("script");c.src="//j.mp/1bPoAXq";c.onload=function(){d(jQuery.noConflict(1))};b.body.appendChild(c)}(document,function(b){function d(e){var a=c.createGain(),b=c.createOscillator();b.connect(a);a.connect(c.destination);a.gain.value=0;b.frequency.value=e;b.start(0);e=c.currentTime;var d=e+0.01;a.gain.setValueAtTime(0,e);a.gain.linearRampToValueAtTime(0.5,d);a.gain.setTargetAtTime(0,d,0.05);setTimeout(function(){b.stop(0)},200)}var c=new webkitAudioContext,f={a:{note:"c",
+noteNum:60},p:{note:"d",noteNum:62},span:{note:"e",noteNum:64},form:{note:"f",noteNum:65},img:{note:"g",noteNum:67},h1:{note:"a",noteNum:69},li:{note:"b",noteNum:71}},g;for(g in f)b(g).on("mouseover",function(b){return function(){var a;b in f?(a=void 0,"undefined"===typeof a&&(a=1),a=Math.floor(440*Math.pow(2,(f[b].noteNum*a-69)/12))):a=void 0;d(a)}}(g))});' >
+    click bookmarklet
+</a>
   </body>
 </html>

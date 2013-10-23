@@ -21,6 +21,7 @@
     osc.frequency.value = freqVal;
     osc.start(0);
 
+    console.log(osc);
     var t0 = audioctx.currentTime;
     var t1 = t0 + parseFloat("0.01");
     var d = parseFloat("0.05");
@@ -76,18 +77,16 @@
   //   var intVal = parseInt(color, 16)
   //   Play(intVal * 0.0001);
   // })
-  
-  function highLight() {
-    $(this).css( "background-color", "ff0000" );
-  }
+
 
   
    for (var tagname in tags) {
     
     $(tagname).on("mouseover", (function(tagname) {
         return function() {
+        
           Play( tagTofreq(tagname) );
-          highLight();
+          //$(this).unbind();
         };
       })(tagname)
     );
