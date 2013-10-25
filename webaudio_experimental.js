@@ -29,6 +29,12 @@
     gain.gain.linearRampToValueAtTime(0.5, t1);
     gain.gain.setTargetAtTime(s, t1, d);
 
+    /*
+    // クリップおよびメモリリークさせないための苦肉の作
+    // 仕様らしい 詳しくはwebで
+    */
+    setTimeout(function(){osc.stop(0);}, 200)
+
   }
 
 
