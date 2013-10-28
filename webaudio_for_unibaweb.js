@@ -102,7 +102,8 @@
 
       if (ret_vals.length > 0) {
         for (var i = 0; i < ret_vals.length; i ++) {
-          //console.log(ret_vals[i].tagName)        
+          //console.log(ret_vals[i].tagName)
+          $(ret_vals[i]).css("background-color", "lightpink")        
           Play(tagTofreq(ret_vals[i].tagName.toLowerCase()));
         }
           
