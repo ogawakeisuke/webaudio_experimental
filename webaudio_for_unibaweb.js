@@ -3,6 +3,15 @@
 */  
 
   (function(){
+
+    if(typeof clock != "undefined"){
+      clearInterval(clock);
+      delete clock;
+      return 
+    }
+
+
+
     var elmArray = [];
     jQuery.each($("*"), function() {
       var bounding = this.getBoundingClientRect();
@@ -103,10 +112,10 @@
       setTimeout(function(){$(target).css("background-color", originColor);}, 1000)
     }
 
-    var scroll_func = scrolling()
 
-    window.setInterval( function() {
-      var count_val = scroll_func() + 40;
+
+    function countUp() {
+      var count_val = scroll_func() + 20;
 
       var ret_vals = sequence[count_val]
 
@@ -118,8 +127,23 @@
         })
           
       }
-    
-    }, 0.1);
+    }
+
+    var scroll_func = scrolling();
+
+    /* 注意　グローバル変数*/
+    clock = setInterval(countUp, 0.1);
+
+    $(window).mousedown(function() {
+      clearInterval(clock);
+    });
+
+    $(window).mouseup(function() {
+      clock = setInterval(countUp, 0.1);
+    });
+
+
+
 
     /*
     // データとアクセサリ群
