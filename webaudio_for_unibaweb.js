@@ -1,3 +1,7 @@
+/*
+// タグの要素をまとめてシークエンス配列に代入　シークエンスのインデックスはスクロール座標に対応
+*/  
+
   (function(){
     var elmArray = [];
     jQuery.each($("*"), function() {
@@ -33,6 +37,8 @@
 
 
 
+
+
   //-------------------------------------------------------------------//
 
 
@@ -50,8 +56,6 @@
       gain.connect(audioctx.destination);
       gain.gain.value = 0;
     
-        
-      
 
       osc.frequency.value = freqVal;
       osc.start(0);
@@ -93,27 +97,29 @@
       }
     }
 
+    function highLight(target) {
+      var originColor = $(target).css("background-color");
+      $(target).css("background-color", "lightpink");  
+      setTimeout(function(){$(target).css("background-color", originColor);}, 1000)
+    }
+
     var scroll_func = scrolling()
 
-    window.setInterval( function(){
-      var count_val = scroll_func() + 15;
+    window.setInterval( function() {
+      var count_val = scroll_func() + 40;
 
       var ret_vals = sequence[count_val]
 
       if (ret_vals.length > 0) {
-        for (var i = 0; i < ret_vals.length; i ++) {
+        jQuery.each(ret_vals, function() {
           //console.log(ret_vals[i].tagName)
-          $(ret_vals[i]).css("background-color", "lightpink")        
-          Play(tagTofreq(ret_vals[i].tagName.toLowerCase()));
-        }
+          highLight(this);
+          Play(tagTofreq(this.tagName.toLowerCase()));
+        })
           
       }
-
-       
-
-
-
-    }, 10);
+    
+    }, 0.1);
 
     /*
     // データとアクセサリ群

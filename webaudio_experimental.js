@@ -83,18 +83,24 @@
   //   Play(intVal * 0.0001);
   // })
   
-  function highLight() {
-    $(this).css( "background-color", "ff0000" );
+  function highLight(event) {
+    console.log(event.target)
+    var target = event.target;
+    
+    var originColor = $(target).css("background-color");
+    $(target).css("background-color", "lightpink");  
+    setTimeout(function(){$(target).css("background-color", originColor);}, 20)
   }
 
   
    for (var tagname in tags) {
     
     $(tagname).on("mouseover", (function(tagname) {
-        return function() {
-          Play( tagTofreq(tagname) );
-          highLight();
-        };
+      
+      return function(e) {
+        Play( tagTofreq(tagname) );
+        //highLight(e);
+      };
       })(tagname)
     );
   }
