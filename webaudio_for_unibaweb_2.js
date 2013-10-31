@@ -1,7 +1,6 @@
 (function() {
 
   $(".playing").on("click", function(){
-    console.log("aaa");
     
     var elmArray = [];
     jQuery.each($("*"), function() {
@@ -48,33 +47,29 @@
   */
     var audioctx = new webkitAudioContext();
 
+    var buffer = null;
+    LoadSample(audioctx, "src/snare.aiff");
+
+    function LoadSample(ctx, url) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url, true);
+    req.responseType = "arraybuffer";
+    req.onload = function() {
+      if(req.response) {
+        ctx.decodeAudioData(req.response,function(b){buffer=b;},function(){});
+      }
+      else
+        buffer = ctx.createBuffer(VBArray(req.responseBody).toArray(), false);
+      }
+      req.send();
+    }
+
+
     function Play(freqVal) {
-      var gain = audioctx.createGain();
-      var osc = audioctx.createOscillator();
-      osc.connect(gain);
-      
-      gain.connect(audioctx.destination);
-      gain.gain.value = 0;
-    
-
-      osc.frequency.value = freqVal;
-      osc.start(0);
-
-      var releaseTime = 0.01
-
-      var t0 = audioctx.currentTime;
-      var t1 = t0 + parseFloat(releaseTime);
-      var d = parseFloat("0.05");
-      var s = parseFloat("0.0");
-      gain.gain.setValueAtTime(0, t0);
-      gain.gain.linearRampToValueAtTime(0.5, t1);
-      gain.gain.setTargetAtTime(s, t1, d);
-
-      /*
-      // クリップおよびメモリリークさせないための苦肉の作
-      // 仕様らしい 詳しくはwebで
-      */
-      setTimeout(function(){osc.stop(0);}, 200)
+      var src = audioctx.createBufferSource();
+      src.buffer = buffer;
+      src.connect(audioctx.destination);
+      src.start(0);
     }
 
   /*
@@ -123,7 +118,7 @@
     var scroll_func = scrolling();
 
     /* 注意　グローバル変数*/
-    clock = setInterval(countUp, 10);
+    clock = setInterval(countUp, 0.01);
 
     // $(window).mousedown(function() {
     //   clearInterval(clock);

@@ -1,0 +1,48 @@
+#wrapper{
+  width: 1010px;
+  float: left;
+}
+
+#track_1{
+  width: 200px;
+  background-color: #78FF94;
+  float: left;
+}
+
+#track_2{
+  width: 200px;  
+  background-color: #78FF94;
+  float: left;
+}
+
+#track_3{
+  width: 200px;
+  background-color: #78FF94;
+  float: left;
+}
+
+#track_4{
+  width: 200px;
+  background-color: #78FF94;
+  float: left;
+}
+
+.measure{
+  height :200px;
+  background-color: #DCDCDC;
+}
+
+.quarter{
+  height: 50px;
+  background-color: #FFD5EC;
+}
+
+a {
+  background-color: #9966FF;
+}
+
+span {
+  background-color: #FF9900;
+}
+
+

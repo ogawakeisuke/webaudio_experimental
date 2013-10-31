@@ -27,7 +27,6 @@
       return elm.val
     })
     var max = parseInt(Math.max.apply(null, elm_vals) );
-    console.log(max);  
 
     var sequence = new Array(max);
 
@@ -90,11 +89,12 @@
   */
         
     function scrolling() {
-      var max = 100000;
+      var max =  $(document).height();
       var count = 1;
 
       return function (){
         if( count > max ){
+          clearInterval(clock);
           return;
         } else {
           scroll(0, count);

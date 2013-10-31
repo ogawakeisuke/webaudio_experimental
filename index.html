@@ -1,16 +1,121 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="css/main.css" media="all">
+  </head>
   <body>
-    
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-    <script src="web_beemani.js"></script>
-    
     <button class="playing"> play </button>
-    
+    <br>
+    <div id="wrapper">
+
+      <div id="track_1"> track_1
+        <div class="measure">
+          
+
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+
+        </div>
+        <div class="measure">
+          
+
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+
+        </div>
+        <div class="measure">
+          
+
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+
+        </div>
+        <div class="measure">
+          
+
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+          <div class="quarter"><a>kick</a></div>
+
+        </div>
+      </div>
+
+      <div id="track_2">track_2
+        <div class="measure">
+          
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+
+        </div>
+        <div class="measure">
+                   
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+
+        </div>
+        <div class="measure">
+                   
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+
+        </div>
+        <div class="measure">
+                   
+          <div class="quarter"></div>
+          <div class="quarter"></div>
+          <div class="quarter"></div>
+          <div class="quarter"><span>snare</span></div>
+
+        </div>
+      </div>
+
+      <div id="track_3">track_3
+        <div class="measure">
+          measure
+        </div>
+        <div class="measure">
+          measure
+        </div>
+        <div class="measure">
+          measure
+        </div>
+        <div class="measure">
+          measure
+        </div>
+      </div>
+
+      <div id="track_4">track_4
+        <div class="measure">
+          measure
+        </div>
+        <div class="measure">
+          measure
+        </div>
+        <div class="measure">
+          measure
+        </div>
+        <div class="measure">
+          measure
+        </div>
+      </div>
 
 
-<a href='javascript:!function(b,d,c){c=b.createElement("script");c.src="//j.mp/1bPoAXq";c.onload=function(){d(jQuery.noConflict(1))};b.body.appendChild(c)}(document,function(b){function d(e){var a=c.createGain(),b=c.createOscillator();b.connect(a);a.connect(c.destination);a.gain.value=0;b.frequency.value=e;b.start(0);e=c.currentTime;var d=e+0.01;a.gain.setValueAtTime(0,e);a.gain.linearRampToValueAtTime(0.5,d);a.gain.setTargetAtTime(0,d,0.05);setTimeout(function(){b.stop(0)},200)}var c=new webkitAudioContext,f={a:{note:"c",
-noteNum:60},p:{note:"d",noteNum:62},span:{note:"e",noteNum:64},form:{note:"f",noteNum:65},img:{note:"g",noteNum:67},h1:{note:"a",noteNum:69},li:{note:"b",noteNum:71}},g;for(g in f)b(g).on("mouseover",function(b){return function(){var a;b in f?(a=void 0,"undefined"===typeof a&&(a=1),a=Math.floor(440*Math.pow(2,(f[b].noteNum*a-69)/12))):a=void 0;d(a)}}(g))});' >
-    click bookmarklet
-</a>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="webaudio_for_unibaweb.js"></script>
   </body>
 </html>
