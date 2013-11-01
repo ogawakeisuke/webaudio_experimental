@@ -48,7 +48,7 @@
     var audioctx = new webkitAudioContext();
 
     var buffer = null;
-    LoadSample(audioctx, "src/snare.aiff");
+    LoadSample(audioctx, "src/snare.wav");
 
     function LoadSample(ctx, url) {
     var req = new XMLHttpRequest();
