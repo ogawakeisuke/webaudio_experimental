@@ -34,6 +34,9 @@
 
 
 
+    var hitbar = $("#hitbar")
+
+
 
 
 
@@ -47,27 +50,33 @@
   */
     var audioctx = new webkitAudioContext();
 
-    var buffer = null;
-    LoadSample(audioctx, "src/snare.wav");
 
-    function LoadSample(ctx, url) {
+    var buffer = {
+      node1: null,
+      node2: null
+    }
+    
+
+    LoadSample(audioctx, "src/snare.wav", "node1");
+    //LoadSample(audioctx, "src/snare.wav", "node2");
+
+    function LoadSample(ctx, url, bufferName) {
     var req = new XMLHttpRequest();
     req.open("GET", url, true);
     req.responseType = "arraybuffer";
     req.onload = function() {
       if(req.response) {
-        ctx.decodeAudioData(req.response,function(b){buffer=b;},function(){});
+        ctx.decodeAudioData(req.response, function(b) { buffer.node1 = b; },function() { });
       }
       else
-        buffer = ctx.createBuffer(VBArray(req.responseBody).toArray(), false);
+        buffer.node1 = ctx.createBuffer(VBArray(req.responseBody).toArray(), false);
       }
       req.send();
     }
 
-
-    function Play(freqVal) {
+    function Play(freqVal, bufferName) {
       var src = audioctx.createBufferSource();
-      src.buffer = buffer;
+      src.buffer = buffer.node1;
       src.connect(audioctx.destination);
       src.start(0);
     }
@@ -82,10 +91,10 @@
 
       return function (){
         if( count > max ){
-          return;
+          count = 0;
         } else {
-          scroll(0, count);
-
+          // scroll(0, count);
+          hitbar.css("top", count);
         }
         count += 1;
         return count;
@@ -101,7 +110,7 @@
 
 
     function countUp() {
-      var count_val = scroll_func() + 20;
+      var count_val = scroll_func();
 
       var ret_vals = sequence[count_val]
 
@@ -109,7 +118,9 @@
         jQuery.each(ret_vals, function() {
           //console.log(ret_vals[i].tagName)
           highLight(this);
-          Play(tagTofreq(this.tagName.toLowerCase()));
+          if (tagTofreq(this.tagName.toLowerCase()) != false) {
+            Play();
+          }
         })
           
       }
@@ -118,7 +129,7 @@
     var scroll_func = scrolling();
 
     /* 注意　グローバル変数*/
-    clock = setInterval(countUp, 0.01);
+    clock = setInterval(countUp, 1);
 
     // $(window).mousedown(function() {
     //   clearInterval(clock);
@@ -136,7 +147,7 @@
     */
 
     var tags = {
-      "a"    : { "note" : "c", "noteNum" : 60 },
+      //"a"    : { "note" : "c", "noteNum" : 60 },
       "p"    : { "note" : "d", "noteNum" : 62 },
       "span" : { "note" : "e", "noteNum" : 64 },
       "form" : { "note" : "f", "noteNum" : 65 },
@@ -161,7 +172,7 @@
         var noteNum = tags[tagname].noteNum
         return mtof( key(noteNum) )
       } else {
-
+        return false
       }
     }
 
