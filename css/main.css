@@ -26,12 +26,15 @@ body {
 }
 
 #track_4{
-  width: 20px;
-  background-color: #78FF94;
+  width: 50px;
   float: left;
 }
 
 
+#header{
+  width: 100%;
+  height: 200px;
+}
 
 
 
@@ -55,7 +58,6 @@ body {
 .clap{
   height: 400px;
   background-image: url("../img/a3.png");
-  opacity: 0.9;
 /*  border: solid;
   border-color: #FF0000;*/
 }
@@ -63,14 +65,17 @@ body {
 .synth_1{
   height: 200px;
   background-image: url("../img/a2.png");
-  opacity: 0.9;
+}
+
+.synth_2{
+  height: 50px;
+  background-image: url("../img/a4.png");
 }
 
 
 .kick{
   height: 100px;
   background-image: url("../img/a1.jpg");
-  opacity: 0.9;
 }
 
 

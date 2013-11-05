@@ -95,7 +95,7 @@
 
       return function (){
         if( count > max +42 ){
-          count = 0;
+          count = 200;
         } else {
           scroll(0, count);
           hitbar.css("top", count);
@@ -110,8 +110,7 @@
       $(target).css("background-color", "green");
       
         $(target).animate({ "opacity": 0 }, 0, function(){
-          console.log(this);
-          $(this).animate({ "opacity":　1 }, 150);
+          $(this).animate({ "opacity":　1 }, 100);
         });
       
     }
