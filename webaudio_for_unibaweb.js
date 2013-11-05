@@ -116,7 +116,6 @@
           highLight(this);
           Play(tagTofreq(this.tagName.toLowerCase()));
         })
-          
       }
     }
 

@@ -53,12 +53,16 @@
 
     var buffer = {
       node1: null,
-      node2: null
+      node2: null,
+      node3: null,
+      node4: null
     }
     
 
-    LoadSample(audioctx, "src/snare.wav", "node1");
-    //LoadSample(audioctx, "src/snare.wav", "node2");
+    LoadSample(audioctx, "src/kick.wav", "node1");
+    LoadSample(audioctx, "src/clap.wav", "node2");
+    LoadSample(audioctx, "src/massive.wav", "node3");
+    LoadSample(audioctx, "src/massive2.wav", "node4");
 
     function LoadSample(ctx, url, bufferName) {
     var req = new XMLHttpRequest();
@@ -75,9 +79,8 @@
     }
 
     function Play(bufferName) {
-      console.log(buffer[bufferName]);
       var src = audioctx.createBufferSource();
-      src.buffer = buffer.node1;
+      src.buffer = buffer[bufferName];
       src.connect(audioctx.destination);
       src.start(0);
     }
@@ -87,17 +90,17 @@
   */
         
     function scrolling() {
-      var max =  $(document).height();
+      
       var count = 1;
 
       return function (){
-        if( count > max ){
+        if( count > max - 5 ){
           count = 0;
         } else {
-          // scroll(0, count);
+          scroll(0, count);
           hitbar.css("top", count);
         }
-        count += 1;
+        count += 3;
         return count;
       }
     }
@@ -105,32 +108,59 @@
     function highLight(target) {
       var originColor = $(target).css("background-color");
       $(target).css("background-color", "lightpink");  
-      setTimeout(function(){$(target).css("background-color", originColor);}, 1000)
+      setTimeout(function(){$(target).css("background-color", originColor);}, 200)
     }
 
 
 
     function countUp() {
       var count_val = scroll_func();
+      var ret_vals = fetchSequenceVal(count_val);
 
-      var ret_vals = sequence[count_val]
 
       if (ret_vals.length > 0) {
         jQuery.each(ret_vals, function() {
           //console.log(ret_vals[i].tagName)
           highLight(this);
-          if (tagTofreq(this.tagName.toLowerCase()) != false) {
-            Play("node1");
+          if (tagToBuf(this.tagName.toLowerCase()) != false) {
+            Play( tagToBuf(this.tagName.toLowerCase()) );
           }
         })
           
       }
     }
 
+
+    /*
+    // イージングで漏れたタグを検出するためのひどい実装メソッド
+    */
+    function fetchSequenceVal(index) {
+      if (sequence[index].length > 0){
+        return sequence[index]
+      }
+      var expect_index = index + 1
+      if (sequence[expect_index].length > 0){
+        return sequence[expect_index]
+      }
+
+      expect_index = expect_index + 1
+      if (sequence[expect_index].length > 0){
+        return sequence[expect_index]
+      }
+
+      // なにもなければもうそのまま返す
+      return sequence[index]
+
+    }
+
     var scroll_func = scrolling();
 
+
+
+
+
     /* 注意　グローバル変数*/
-    clock = setInterval(countUp, 1);
+    clock = setInterval(countUp, 12);
 
     // $(window).mousedown(function() {
     //   clearInterval(clock);
@@ -147,32 +177,22 @@
     */
 
     var tags = {
-      "a"    : { "note" : "c", "noteNum" : 60 },
-      "p"    : { "note" : "d", "noteNum" : 62 },
-      "span" : { "note" : "e", "noteNum" : 64 },
-      "form" : { "note" : "f", "noteNum" : 65 },
-      "img"  : { "note" : "g", "noteNum" : 67 },
-      "h1"   : { "note" : "a", "noteNum" : 69 },
-      "li"   : { "note" : "b", "noteNum" : 71 }
-    }
-
-    function key(noteNum, oct){
-      if(typeof oct === 'undefined') oct = 1;
-      return noteNum * oct;
-    }
-
-    function mtof(val) {
-      return Math.floor(440*Math.pow(2, (val-69)/12));
+      "a"    : { "note" : "drum", "noteNum" : "node1" },
+      "p"    : { "note" : "d", "noteNum" : "node4" },
+      "span" : { "note" : "e", "noteNum" : "node2" },
+      "form" : { "note" : "snare", "noteNum" : "node2" },
+      //"img"  : { "note" : "g", "noteNum" : "node3" },
+      "h1"   : { "note" : "a", "noteNum" : "node2" },
+      "li"   : { "note" : "b", "noteNum" : "node3" }
     }
 
 
-    function tagTofreq(tagname) {
+    function tagToBuf(tagname) {
       if (tagname in tags) {
-        //console.log(tagname)
-        var noteNum = tags[tagname].noteNum
-        return mtof( key(noteNum) )
+        //console.log(tags[tagname].noteNum)
+        return tags[tagname].noteNum
       } else {
-
+        return false
       }
     }
 
