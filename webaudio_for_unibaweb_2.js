@@ -66,15 +66,16 @@
     req.responseType = "arraybuffer";
     req.onload = function() {
       if(req.response) {
-        ctx.decodeAudioData(req.response, function(b) { buffer.node1 = b; },function() { });
+        ctx.decodeAudioData(req.response, function(b) { buffer[bufferName] = b; },function() { });
       }
       else
-        buffer.node1 = ctx.createBuffer(VBArray(req.responseBody).toArray(), false);
+        buffer[bufferName] = ctx.createBuffer(VBArray(req.responseBody).toArray(), false);
       }
       req.send();
     }
 
-    function Play(freqVal, bufferName) {
+    function Play(bufferName) {
+      console.log(buffer[bufferName]);
       var src = audioctx.createBufferSource();
       src.buffer = buffer.node1;
       src.connect(audioctx.destination);
@@ -119,7 +120,7 @@
           //console.log(ret_vals[i].tagName)
           highLight(this);
           if (tagTofreq(this.tagName.toLowerCase()) != false) {
-            Play();
+            Play("node1");
           }
         })
           
@@ -141,13 +142,12 @@
 
 
 
-
     /*
     // データとアクセサリ群
     */
 
     var tags = {
-      //"a"    : { "note" : "c", "noteNum" : 60 },
+      "a"    : { "note" : "c", "noteNum" : 60 },
       "p"    : { "note" : "d", "noteNum" : 62 },
       "span" : { "note" : "e", "noteNum" : 64 },
       "form" : { "note" : "f", "noteNum" : 65 },
@@ -172,9 +172,10 @@
         var noteNum = tags[tagname].noteNum
         return mtof( key(noteNum) )
       } else {
-        return false
+
       }
     }
+
 
 
 
