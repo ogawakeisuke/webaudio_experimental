@@ -1,8 +1,37 @@
 body {  
-
-    text-align: center;  
+  text-align: center;  
+  margin: 0;
+  padding: 5px 0 0 0;
 }  
 
+h1 {
+  margin: 0;
+  padding: 31px 0;
+  background-color: #110070;
+}
+
+.play {
+  background-color: #f0f0f0;
+}
+
+button {
+  background-color: #cc1433;
+  border: none;
+  width: 800px;
+  height: 58px;
+  margin: 8px 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+#header{
+  width: 100%;
+  height: 200px;
+}
 
 #wrapper{
   width: 1300px;
@@ -10,8 +39,7 @@ body {
 }
 
 #track_1{
-  width: 400px;
-  
+  width: 400px; 
   float: left;
 }
 
@@ -29,14 +57,6 @@ body {
   width: 50px;
   float: left;
 }
-
-
-#header{
-  width: 100%;
-  height: 200px;
-}
-
-
 
 .measure{
   height :400px;
@@ -61,6 +81,13 @@ body {
 /*  border: solid;
   border-color: #FF0000;*/
 }
+.clap.clap-2 {
+  background-image: url("../img/a3_2.png");
+}
+.clap.clap-3 {
+  background-image: url("../img/a3_3.png");
+}
+
 
 .synth_1{
   height: 200px;
@@ -75,7 +102,7 @@ body {
 
 .kick{
   height: 100px;
-  background-image: url("../img/a1.jpg");
+  background-image: url("../img/a1.png");
 }
 
 
